@@ -31,7 +31,7 @@ library(ggplot2)
 
 **Fill in the blanks**
 
-1.  Use the `read_csv()` function to import the 'country_level_data_0.csv' file from the wk-04/data folder by assigning it to an object name `global_waste_data`
+1.  Use the `read_csv()` function to import the 'country_level_data_0.csv' file from the md-05/data folder by assigning it to an object name `global_waste_data`
 2.  Run the code contained in the code-chunk
 3.  Render and fix any errors
 
