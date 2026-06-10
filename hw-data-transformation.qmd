@@ -19,12 +19,15 @@ You will notice that the descriptions of tasks are getting shorter with less det
 
 # Task 0: Load R packages
 
-1.  Load the `dplyr`, `readr`, and `ggplot2` R Packages.
+1.  Load the `dplyr`, `readr`, `ggplot2`, `here`, `gt`, and `knitr` R Packages.
 
 ```{r}
 library(dplyr)
 library(readr)
 library(ggplot2)
+library(here)
+library(gt)
+library(knitr)
 ```
 
 # Task 1: Data import
@@ -400,11 +403,7 @@ table_msw_generation <-  read_rds(here::here("data/02-table-msw-generation.rds")
 
 ```{r}
 
-# loading the gt R package here instead of at the beginning of the script.
-
-library(gt)
-
-table_composition |> 
+table_composition |>
   gt() |>
   tab_header(
     title = "Municipal Solid Waste by Income",
@@ -446,7 +445,7 @@ table_msw_generation |>
 
 1.  Open the Git pane in RStudio. It's in the top right corner in a separate tab.
 2.  **Stage** your changes by checking appropriate box next to all files (if you select one file with your mouse, you can then highlight them all with Ctrl + A on your keyboard and check all boxes)
-3.  Write a meaningful commit message (e.g. "Completed week 4 data transformation homework") in the **Commit message** box
+3.  Write a meaningful commit message (e.g. "Completed week 5 data transformation homework") in the **Commit message** box
 4.  Click **Commit**. Note that every commit needs to have a commit message associated with it.
 5.  Click **Push** to send your changes to GitHub.
 6.  Go to your md-05-USERNAME GitHub repo (where USERNAME is your GitHub username) and refresh the page. You should see your commit message next to the updated files.

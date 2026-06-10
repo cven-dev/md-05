@@ -1,11 +1,11 @@
-# md-05 — Data transformation and descriptive statistics
+# md-05 - Data transformation and descriptive statistics
 
 ## What's in here
 
-- `live-data-transformation.qmd` — live coding from lecture (with `-solutions` companion)
-- `hw-data-transformation.qmd` — homework exercise (with `-solutions` companion)
-- `learning-05.qmd` — learning reflection
-- `data/` — datasets used by the exercises
+- `live-data-transformation.qmd` - live coding from lecture (with `-solutions` companion)
+- `hw-data-transformation.qmd` - homework exercise (with `-solutions` companion)
+- `learning-05.qmd` - learning reflection
+- `data/` - datasets used by the exercises
 
 ## How to use
 
@@ -15,4 +15,4 @@
 
 ## License
 
-[CC BY 4.0](LICENSE.md) — © 2026 Lars Schöbitz
+[CC BY 4.0](LICENSE.md) - © 2026 Lars Schöbitz
