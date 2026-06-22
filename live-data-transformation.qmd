@@ -4,7 +4,7 @@ format:
   html:
     embed-resources: true
 editor: visual
-editor_options: 
+editor_options:
   chunk_output_type: console
 execute:
   echo: true
@@ -23,7 +23,7 @@ library(tidyr)
 # Data import
 
 ```{r}
-
+sanitation <- read_csv("data/jmp-washdata-indicators-safely-managed-sml.csv")
 
 ```
 
@@ -44,26 +44,19 @@ All code for pre-processing and the imported data can be accessed from the [larn
 
 The `dplyr` R Package aims to provide a function for each basic verb of data manipulation. These verbs can be organised into three categories based on the component of the dataset that they work with:
 
--   Rows
--   Columns
--   Groups of rows
+- Rows
+- Columns
+- Groups of rows
+
+# Our turn (1): filter, arrange, select
+
+We start with three verbs together: `filter()`, `arrange()`, and `select()`.
 
 ## Rows
 
 ### dplyr::filter()
 
 The function `filter()` chooses rows based on column values. To use filtering effectively, you have to know how to select the observations that you want using the comparison operators. R provides the standard suite: \>, \>=, \<, \<=, != (not equal), and == (equal).
-
-```{r}
-
-
-```
-
-#### Your turn
-
-1.  Use the `filter()` function to create a subset from the `sanitation` data object containing national estimates for the year 2020
-
-2.  Store the result as a new object in your environment with the name `sanitation_national_2020`
 
 ```{r}
 
@@ -94,11 +87,15 @@ The function `select()` picks variables based on their names.
 
 Helpers select variables by matching patterns in their names:
 
--   `starts_with()`: Starts with a prefix.
--   `ends_with()`: Ends with a suffix.
--   `contains()`: Contains a literal string.
+- `starts_with()`: Starts with a prefix.
+- `ends_with()`: Ends with a suffix.
+- `contains()`: Contains a literal string.
 
 Learn more: https://dplyr.tidyverse.org/reference/select.html
+
+# Our turn (2): the remaining verbs
+
+We work through the remaining verbs: `rename()`, `relocate()`, `mutate()` (and factors), and `group_by()` & `summarise()`.
 
 ### dplyr::rename()
 
@@ -138,8 +135,8 @@ Categorical variables that have a natural order (ordinal variables) need to be t
 # What is with the order?
 
 ggplot(data = sanitation_national_2020,
-       mapping = aes(x = income_id, 
-                     y = percent, 
+       mapping = aes(x = income_id,
+                     y = percent,
                      fill = income_id)) +
   geom_boxplot(outlier.shape = NA) +
   geom_jitter(width = 0.1)
@@ -149,8 +146,8 @@ ggplot(data = sanitation_national_2020,
 # Let's check again with the new data
 
 # ggplot(data = sanitation_national_2020_fct,
-#        mapping = aes(x = income_id_fct, 
-#                      y = percent, 
+#        mapping = aes(x = income_id_fct,
+#                      y = percent,
 #                      fill = income_id)) +
 #   geom_boxplot(outlier.shape = NA) +
 #   geom_jitter(width = 0.1)
@@ -164,23 +161,6 @@ ggplot(data = sanitation_national_2020,
 
 ```{r}
 
-
-
-```
-
-#### Your turn
-
-1.  Starting with `sanitation_national_2020_fct`, use the `mutate()` function to add a new column with the number of people with access to safely managed sanitation in each country. Name the column people_access (**Tipp: Check out how we did this in dplyr::mutate() section of this document.**)
-
-2.  Use the pipe operator to add another line of code which adds the `drop_na()` function to remove all NAs from the data
-
-3.  Use the pipe operator to add another line of code which adds the `group_by()` function to group the data by region.
-
-4.  Use the pipe operator to add another line of code which adds the `summarise()` to create a summary table that contains the sum of the people_access column (call this people_access) and the sum of the pop column (call this pop) for each region.
-
-5.  Use the pipe operator to add another line of code which adds the `mutate()` function to add a new column with the percentage of people with access to safely managed sanitation in each region. Name the new column percent.
-
-```{r}
 
 
 ```

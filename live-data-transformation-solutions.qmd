@@ -1,10 +1,10 @@
 ---
-title: "Live Coding - Data transformation"
+title: "Live Coding - Data transformation (solutions)"
 format:
   html:
     embed-resources: true
 editor: visual
-editor_options: 
+editor_options:
   chunk_output_type: console
 execute:
   echo: true
@@ -25,7 +25,7 @@ library(here)
 
 ```{r}
 
-sanitation <- read_csv(here("data/jmp-washdata-indicators-safely-managed-sml.csv"))
+sanitation <- read_csv("data/jmp-washdata-indicators-safely-managed-sml.csv")
 
 ```
 
@@ -48,9 +48,11 @@ sanitation
 
 The `dplyr` R Package aims to provide a function for each basic verb of data manipulation. These verbs can be organised into three categories based on the component of the dataset that they work with:
 
--   Rows
--   Columns
--   Groups of rows
+- Rows
+- Columns
+- Groups of rows
+
+# Our turn (1): filter, arrange, select
 
 ## Rows
 
@@ -60,43 +62,35 @@ The function `filter()` chooses rows based on column values. To use filtering ef
 
 ```{r}
 
-sanitation |> 
+sanitation |>
   filter(residence == "national")
 
-sanitation |> 
-  filter(residence == "national", iso3 == "SEN") 
+sanitation |>
+  filter(residence == "national", iso3 == "SEN")
 
-sanitation |> 
+sanitation |>
   filter(iso3 == "UGA" | iso3 == "GHA" | iso3 == "USA")
 
-sanitation |> 
+sanitation |>
   filter(iso3 %in% c("UGA", "GHA", "USA"))
 
-sanitation |> 
+sanitation |>
   filter(residence != "national")
 
-sanitation |> 
+sanitation |>
   filter(percent > 80)
 
-sanitation |> 
+sanitation |>
   filter(percent < 5)
 
-```
+# Create a subset of national estimates for 2020 for later use
 
-#### Your turn
-
-1.  Use the `filter()` function to create a subset from the `sanitation` data object containing national estimates for the year 2020
-
-2.  Store the result as a new object in your environment with the name `sanitation_national_2020`
-
-```{r}
-
-sanitation_national_2020 <- sanitation |> 
+sanitation_national_2020 <- sanitation |>
   filter(residence == "national", year == 2020)
 
 # What is in the variables?
 
-sanitation |> 
+sanitation |>
   count(residence)
 
 ```
@@ -107,10 +101,10 @@ The function `arrange()` changes the order of the rows.
 
 ```{r}
 
-sanitation_national_2020 |> 
+sanitation_national_2020 |>
   arrange(percent)
 
-sanitation_national_2020 |> 
+sanitation_national_2020 |>
   arrange(desc(percent))
 
 ```
@@ -123,24 +117,26 @@ The function `select()` picks variables based on their names.
 
 ```{r}
 
-sanitation_national_2020 |> 
+sanitation_national_2020 |>
   select(name, iso3, percent, pop)
 
-sanitation_national_2020 |> 
+sanitation_national_2020 |>
   select(name:percent, -year)
 
-sanitation_national_2020 |> 
+sanitation_national_2020 |>
   select(name:percent, -year, starts_with("p"))
 
 ```
 
 Helpers select variables by matching patterns in their names:
 
--   `starts_with()`: Starts with a prefix.
--   `ends_with()`: Ends with a suffix.
--   `contains()`: Contains a literal string.
+- `starts_with()`: Starts with a prefix.
+- `ends_with()`: Ends with a suffix.
+- `contains()`: Contains a literal string.
 
 Learn more: https://dplyr.tidyverse.org/reference/select.html
+
+# Our turn (2): the remaining verbs
 
 ### dplyr::rename()
 
@@ -148,7 +144,7 @@ The function `rename()` changes the name of columns.
 
 ```{r}
 
-sanitation_national_2020 |> 
+sanitation_national_2020 |>
   rename(country_name = name)
 
 ```
@@ -159,16 +155,16 @@ The function `relocate()` changes the order of the columns.
 
 ```{r}
 
-sanitation_national_2020 |> 
+sanitation_national_2020 |>
   relocate(income_id)
 
-sanitation_national_2020 |> 
+sanitation_national_2020 |>
   relocate(income_id, .after = year)
 
-sanitation_national_2020 |> 
+sanitation_national_2020 |>
   relocate(income_id, .before = percent)
 
-sanitation_national_2020 |> 
+sanitation_national_2020 |>
   relocate(residence:income_id, .before = percent)
 
 ```
@@ -179,8 +175,8 @@ The function `mutate()` changes the values of columns and creates new columns.
 
 ```{r}
 
-sanitation_national_2020 %>% 
-  mutate(people_access = pop * percent / 100) 
+sanitation_national_2020 %>%
+  mutate(people_access = pop * percent / 100)
 
 ```
 
@@ -192,8 +188,8 @@ Categorical variables that have a natural order (ordinal variables) need to be t
 
 
 ggplot(data = sanitation_national_2020,
-       mapping = aes(x = income_id, 
-                     y = percent, 
+       mapping = aes(x = income_id,
+                     y = percent,
                      fill = income_id)) +
   geom_boxplot(outlier.shape = NA) +
   geom_jitter(width = 0.1)
@@ -203,12 +199,12 @@ ggplot(data = sanitation_national_2020,
 
 income_levels <- c("LIC", "LMC", "UMC", "HIC")
 
-sanitation_national_2020_fct <- sanitation_national_2020 |> 
+sanitation_national_2020_fct <- sanitation_national_2020 |>
   mutate(income_id_fct = factor(income_id, levels = income_levels))
 
 ggplot(data = sanitation_national_2020_fct,
-       mapping = aes(x = income_id_fct, 
-                     y = percent, 
+       mapping = aes(x = income_id_fct,
+                     y = percent,
                      fill = income_id)) +
   geom_boxplot(outlier.shape = NA) +
   geom_jitter(width = 0.1)
@@ -224,69 +220,45 @@ ggplot(data = sanitation_national_2020_fct,
 
 # How does summarise work
 
-sanitation_national_2020_fct %>% 
+sanitation_national_2020_fct %>%
   summarise()
 
-sanitation_national_2020_fct |> 
+sanitation_national_2020_fct |>
   summarise(percent = mean(percent, na.rm = TRUE),
             count = n())
 
 
-sanitation_national_2020_fct |> 
-  filter(!is.na(percent)) |> 
+sanitation_national_2020_fct |>
+  filter(!is.na(percent)) |>
   summarise(mean = mean(percent),
             count = n())
 
 # Summarise works well with group_by (frequency tables)
 
-sanitation_national_2020_fct |> 
-  group_by(region) |> 
+sanitation_national_2020_fct |>
+  group_by(region) |>
   summarise(
     count = n()
   )
 
 ## Shortcut
 
-sanitation_national_2020_fct |> 
+sanitation_national_2020_fct |>
   count(region)
 
 ## Factor order
 
-sanitation_national_2020_fct |> 
+sanitation_national_2020_fct |>
   count(income_id_fct)
 
 ## Additional summary statistics
 
 sanitation_national_2020_fct |>
-  drop_na() |> 
-  group_by(income_id_fct) |> 
+  drop_na() |>
+  group_by(income_id_fct) |>
   summarise(count = n(),
             mean = mean(percent),
             sd = sd(percent),
-            median = median(percent)) 
-
-```
-
-#### Your turn
-
-1.  Starting with `sanitation_national_2020_fct`, use the `mutate()` function to add a new column with the number of people with access to safely managed sanitation in each country. Name the column people_access (**Tipp: Check out how we did this in dplyr::mutate() section of this document.**)
-
-2.  Use the pipe operator to add another line of code which adds the `drop_na()` function to remove all NAs from the data
-
-3.  Use the pipe operator to add another line of code which adds the `group_by()` function to group the data by region.
-
-4.  Use the pipe operator to add another line of code which adds the `summarise()` to create a summary table that contains the sum of the people_access column (call this people_access) and the sum of the pop column (call this pop) for each region.
-
-5.  Use the pipe operator to add another line of code which adds the `mutate()` function to add a new column with the percentage of people with access to safely managed sanitation in each region. Name the new column percent.
-
-```{r}
-
-sanitation_national_2020_fct |> 
-  mutate(people_access = pop * percent / 100) |> 
-  drop_na() |>  
-  group_by(region) |> 
-  summarise(people_access = sum(people_access),
-            pop = sum(pop)) |> 
-  mutate(percent = people_access / pop * 100)
+            median = median(percent))
 
 ```
