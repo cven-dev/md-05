@@ -13,6 +13,17 @@ execute:
 
 # Note!
 
+## How we work through this file
+
+We work through this file in two ways:
+
+- **In class (your turn, in break-out rooms):** After each "our turn" live demo, you work on parts of this file together in break-out rooms.
+  - **Breakout 1:** Task 1 (Data import) and Task 2 (Data tidying)
+  - **Breakout 2:** the remaining parts of Task 3 (Data transformation)
+- **At home (homework):** Everything you do not finish in the break-out rooms, plus Task 4 (Data visualisations), Task 5 (Tables), and Task 6 (Complete assignment).
+
+The live demos happen in `live-data-transformation.qmd`, which is for the instructor to write code while you follow along. You write your own code in this file.
+
 ## Task descriptions and starter code
 
 You will notice that the descriptions of tasks are getting shorter with less detail provided. This is the case for all functions you have previously practiced either in your homework or in live coding exercises in class. Tasks now provide complete working code examples to guide your learning.
@@ -54,8 +65,8 @@ Follow these steps to select specific variables:
 
 1.  Start with the `global_waste_data` object and use the `select()` function to create a subset that only keeps the following variables:
 
--   `iso3c`
--   all variables that end with "percent" (**Tip: Use one of the [selection helper functions](https://dplyr.tidyverse.org/reference/select.html)**)
+- `iso3c`
+- all variables that end with "percent" (**Tip: Use one of the [selection helper functions](https://dplyr.tidyverse.org/reference/select.html)**)
 
 2.  Run the code contained in the code chunk and fix any errors
 
@@ -72,11 +83,11 @@ global_waste_data |>
 
 1.  Start with the `global_waste_data` object and use the `select()` function to create a subset that only keeps the following variables:
 
--   `country_name`
--   `income_id`
--   `total_msw_total_msw_generated_tons_year`
--   `population_population_number_of_people`
--   all variables starting with "composition" (**Tip: Use one of the [selection helper functions](https://dplyr.tidyverse.org/reference/select.html)**)
+- `country_name`
+- `income_id`
+- `total_msw_total_msw_generated_tons_year`
+- `population_population_number_of_people`
+- all variables starting with "composition" (**Tip: Use one of the [selection helper functions](https://dplyr.tidyverse.org/reference/select.html)**)
 
 2.  Store the subset as a new object in your environment with the name `composition`
 
@@ -99,9 +110,9 @@ composition <- global_waste_data |>
 
 1.  Start with the `composition` object and use the `rename()` function to rename all columns that start with "composition". Shorten the names to keep the waste category only. For example:
 
--   rename `composition_food_organic_waste_percent` to `food_organic_waste`
--   rename `composition_glass_percent` to `glass`,
--   etc.
+- rename `composition_food_organic_waste_percent` to `food_organic_waste`
+- rename `composition_glass_percent` to `glass`,
+- etc.
 
 2.  Rename `total_msw_total_msw_generated_tons_year` to `msw_tons_year`.
 
@@ -471,11 +482,11 @@ The [`gt` R Package](https://gt.rstudio.com/index.html) is an extremely powerful
 1.  Execute the following two code chunks
 2.  Read the code, observe the output in the Viewer pane, and describe in your own words what each function does
 
--   `gt()`:
--   `tab_header()`:
--   `fmt_number()`:
--   `starts_with()`:
--   `cols_labels()`:
+- `gt()`:
+- `tab_header()`:
+- `fmt_number()`:
+- `starts_with()`:
+- `cols_labels()`:
 
 ```{r}
 # As previously, I have stored the data that I would have expected for the
@@ -513,8 +524,8 @@ Below is another table for the report that uses the `knitr` R Package to style t
 
 1.  Read the code and describe in your own words what each function does
 
--   `rename()`:
--   `knitr::kable()`:
+- `rename()`:
+- `knitr::kable()`:
 
 ```{r}
 
